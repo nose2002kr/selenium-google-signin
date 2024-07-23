@@ -75,5 +75,18 @@ class SeleniumUtil:
                 driver_path = ChromeDriverManager().install()
         service = Service(driver_path)
 
-        driver = webdriver.Chrome(service=service, options=chrome_options)
+        driver = webdriver.Chrome(chrome_options, service)
         return driver
+
+# expose as global function
+def launch_selenium(driver_path: str = None) -> webdriver.Chrome:
+    """
+    Launches a selenium webdriver with the specified driver path.
+    :param driver_path: str
+    :return: webdriver.Chrome
+
+    Example:
+    driver = launch_selenium('/path/where/chromedriver')
+    driver.quit()
+    """
+    return SeleniumUtil.launch_selenuim(driver_path)

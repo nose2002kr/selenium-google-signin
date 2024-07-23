@@ -11,6 +11,17 @@ from ._config import Config, logger
 
 
 def login_to_google(driver: webdriver.Chrome = None, url_requires_login: str = None) -> None:
+    """
+    Login to Google and save cookies to cache
+    :param driver: webdriver.Chrome
+    :param url_requires_login: str
+    :return: None
+    
+    Example:
+    driver = launch_selenium('/path/where/chromedriver')
+    login_to_google(driver)
+    driver.quit()
+    """
     google_cookie_path = user_cache_dir('login_cache', ensure_exists=True) + '/google-cookies.json'
     
     if driver is None:
