@@ -12,8 +12,8 @@ Don't worry, it doesn't save the username and password used to log in.
 ```
 # ./main.py 
 
-from google_login import launch_selenium
-from google_login import login_to_google
+from selenium_google_login import launch_selenium
+from selenium_google_login import login_to_google
 
 if __name__ == '__main__':
     driver = launch_selenium('/path/where/chromedriver')
