@@ -7,6 +7,7 @@ from urllib import parse
 
 from ._config import Config, logger
 
+no_chrome_driver_manager = False
 try:
     from webdriver_manager.chrome import ChromeDriverManager
 except ImportError:

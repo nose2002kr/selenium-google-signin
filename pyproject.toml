@@ -3,7 +3,7 @@
 requires = ["setuptools"]
 
 [project]
-name = "selenium_google_login"
+name = "selenium_google_signin"
 version = "0.1.4"
 authors = [
   { name="ksks", email="nose2002kr@gmail.com" },
@@ -34,5 +34,5 @@ config = [
 
 
 [project.urls]
-Homepage = "https://github.com/nose2002kr/selenium-google-login"
-Issues = "https://github.com/nose2002kr/selenium-google-login"
+Homepage = "https://github.com/nose2002kr/selenium-google-signin"
+Issues = "https://github.com/nose2002kr/selenium-google-signin"
