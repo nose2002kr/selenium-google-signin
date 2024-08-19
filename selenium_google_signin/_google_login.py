@@ -28,7 +28,7 @@ def login_to_google(driver: webdriver.Chrome = None, url_requires_login: str = N
         driver = SeleniumUtil.launch_selenuim()
     
     if url_requires_login is None:
-        url_requires_login = 'https://accounts.google.com'
+        url_requires_login = 'https://myaccount.google.com'
 
     google_cookies = None
     try:
@@ -42,21 +42,26 @@ def login_to_google(driver: webdriver.Chrome = None, url_requires_login: str = N
     driver.get(url_requires_login)
     if driver.current_url.startswith(Config.google_login_url):
         logger.warning('Google AutoLogin failure')
-        WebDriverWait(driver, Config.WEBDRV_TIMEOUT).until(EC.url_contains(Config.google_path_when_entering_id))
-        if Config.google_id is not None:
-            WebDriverWait(driver, Config.WEBDRV_TIMEOUT).until(EC.presence_of_element_located((By.ID, 'identifierId')))
-            driver.find_element(By.ID, 'identifierId').send_keys(Config.google_id)
+        WebDriverWait(driver, Config.WEBDRV_TIMEOUT).until(
+            lambda _: Config.google_path_when_entering_id in driver.current_url or 
+                    Config.google_path_when_confirm_id in driver.current_url)
+        
+        if Config.google_path_when_entering_id in driver.current_url:
+            if Config.google_id is not None:
+                WebDriverWait(driver, Config.WEBDRV_TIMEOUT).until(EC.presence_of_element_located((By.ID, 'identifierId')))
+                driver.find_element(By.ID, 'identifierId').send_keys(Config.google_id)
 
         WebDriverWait(driver, Config.WEBDRV_TIMEOUT).until(EC.url_contains(Config.google_path_when_entering_pwd))
         if Config.google_pwd is not None:
             WebDriverWait(driver, Config.WEBDRV_TIMEOUT).until(EC.presence_of_element_located((By.NAME, 'Passwd')))
             driver.find_element(By.NAME, 'Passwd').send_keys(Config.google_pwd)
-        WebDriverWait(driver, Config.WEBDRV_TIMEOUT).until(EC.url_contains(url_requires_login.split('/')[2]))
-        WebDriverWait(driver, Config.WEBDRV_TIMEOUT).until(lambda _: len(
-            list(
-                filter(
-                    lambda x: x['name'] == 'SID',
-                    CookieUtil.get_cookies_for_domain(driver, Config.google_url_for_crawling_cookies)
+        WebDriverWait(driver, Config.WEBDRV_TIMEOUT).until(lambda _: 
+            driver.current_url.startswith(url_requires_login) and
+            len(
+                list(
+                    filter(
+                        lambda x: x['name'] == 'SID',
+                        CookieUtil.get_cookies_for_domain(driver, Config.google_url_for_crawling_cookies)
                     )
                 )
             ) > 0)

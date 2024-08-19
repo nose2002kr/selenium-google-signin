@@ -15,6 +15,7 @@ class Config:
         cls.google_login_url = getenv('GOOGLE_LOGIN_URL', "https://accounts.google.com/v3/signin")
         cls.google_path_when_entering_id = getenv('GOOGLE_PATH_WHEN_ENTERING_ID', "/v3/signin/identifier")
         cls.google_id = getenv('GOOGLE_ID')
+        cls.google_path_when_confirm_id = getenv('GOOGLE_PATH_WHEN_ENTERING_ID', "/v3/signin/confirmidentifier")
         cls.google_path_when_entering_pwd = getenv('GOOGLE_PATH_WHEN_ENTERING_PWD', "/v3/signin/challenge/pwd")
         cls.google_pwd = getenv('GOOGLE_PWD')
         cls.google_url_for_crawling_cookies = getenv('GOOGLE_URL_FOR_CRAWLING_COOKIES', "https://accounts.google.com/o/oauth2/v2/auth")
