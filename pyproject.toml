@@ -4,7 +4,7 @@ requires = ["setuptools"]
 
 [project]
 name = "selenium_google_signin"
-version = "0.1.5"
+version = "0.1.6"
 authors = [
   { name="ksks", email="nose2002kr@gmail.com" },
 ]
